@@ -1,0 +1,6 @@
+class Auth {
+
+  void login() {
+    
+  }
+}
