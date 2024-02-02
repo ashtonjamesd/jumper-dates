@@ -48,7 +48,7 @@ class Login extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context
                     ).push(MaterialPageRoute(
-                        builder: (context) => const Home()
+                        builder: (context) => Home()
                       )
                     );
                   }, 

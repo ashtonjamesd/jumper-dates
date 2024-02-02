@@ -6,7 +6,15 @@ import 'package:jumperdates/widgets/request_details.dart';
 import '../models/date.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  Home({super.key});
+
+    late String selectedRequestType;
+    late String selectedPerson;
+
+    void handleDropdownChange(String selectedRequestType, String selectedPerson) {
+      this.selectedRequestType = selectedRequestType;
+      this.selectedPerson = selectedPerson;
+  }
 
   @override
   State<Home> createState() => _HomeState();
@@ -94,9 +102,9 @@ class _HomeState extends State<Home> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 80),
-                  child: RequestDetails(date: selectedDate),
+                  child: RequestDetails(date: selectedDate, onDropdownChange: widget.handleDropdownChange),
                 ),
-                RequestButton(date: selectedDate),
+                RequestButton(date: selectedDate, request: widget.selectedRequestType, person: widget.selectedPerson),
               ],
             ),
           )

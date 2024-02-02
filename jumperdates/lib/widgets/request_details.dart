@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
 class RequestDetails extends StatefulWidget {
-  const RequestDetails({super.key, required this.date});
+  const RequestDetails({super.key, required this.date, required this.onDropdownChange});
 
   final DateTime date;
+  final Function(String, String) onDropdownChange;
 
   @override
   State<RequestDetails> createState() => _RequestDetailsState();
 }
 
 class _RequestDetailsState extends State<RequestDetails> {
+  late DateTime selectedDate;
+  String selectedRequestType = "CL";
+  String selectedPerson = "AD"; 
 
   @override
   void initState() {
@@ -26,10 +30,6 @@ class _RequestDetailsState extends State<RequestDetails> {
       });
     }
   }
-
-  late DateTime selectedDate;
-  String selectedRequestType = "CL";
-  String selectedPerson = "AD"; 
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +58,7 @@ class _RequestDetailsState extends State<RequestDetails> {
             onChanged: (String? value) {
               setState(() {
                 selectedRequestType = value ?? "CL";
+                widget.onDropdownChange(selectedRequestType, selectedPerson);
               });
             },
           ),
@@ -77,7 +78,8 @@ class _RequestDetailsState extends State<RequestDetails> {
             selectedValue: selectedPerson,
             onChanged: (String? value) {
               setState(() {
-                selectedPerson = value ?? "AD"; // Provide a default value if null
+                selectedPerson = value ?? "AD";
+                widget.onDropdownChange(selectedRequestType, selectedPerson);
               });
             },
           ),
