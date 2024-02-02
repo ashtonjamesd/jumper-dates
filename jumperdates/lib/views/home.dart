@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:jumperdates/widgets/request_button.dart';
+import 'package:jumperdates/widgets/request_details.dart';
 
 import '../models/date.dart';
 
@@ -14,6 +15,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   late DateTime selectedDate = DateTime.now();
+  Color ashtonColour = Colors.red;
+  Color harryColour = Colors.blue;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,7 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Date(
-                        occupant: "Ashton Dunderdale",
+                        occupant: "",
                         date: DatePicker(
                           height: 100,
                           DateTime.now(),
@@ -84,7 +87,19 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          RequestButton(date: selectedDate),
+          Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 80),
+                  child: RequestDetails(date: selectedDate),
+                ),
+                RequestButton(date: selectedDate),
+              ],
+            ),
+          )
         ],
       ),
     );

@@ -16,21 +16,18 @@ class RequestButton extends StatelessWidget {
         Request req = Request(isRequest: true, description: "description", date: DateTime.now(), userID: "HARRISON");
         jumper.request(req, date);
       },
-      child: Padding(
-        padding: const EdgeInsets.only(top: 40),
-        child: Container(
-          height: 40,
-          width: 120,
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 62, 62, 62),
-            borderRadius: BorderRadius.circular(4)
-          ),
-          child: const Center(
-            child: Text(
-              "Request",
-              style: TextStyle(
-                color: Colors.white
-              ),
+      child: Container(
+        height: 40,
+        width: 120,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 62, 62, 62),
+          borderRadius: BorderRadius.circular(4)
+        ),
+        child: const Center(
+          child: Text(
+            "Request",
+            style: TextStyle(
+              color: Colors.white
             ),
           ),
         ),
