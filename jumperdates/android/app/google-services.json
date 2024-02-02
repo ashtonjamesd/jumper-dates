@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "159033422141",
+    "project_id": "jumper-dates",
+    "storage_bucket": "jumper-dates.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159033422141:android:9d3b951bd259e85af51554",
+        "android_client_info": {
+          "package_name": "com.example.jumperdates"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXsYEs3gzdXfpAnvQf2MC0G189EQMu46c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

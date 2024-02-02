@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jumperdates/views/home.dart';
-import 'package:jumperdates/views/login.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-
-void main() {
+Future main() async {
   runApp(const JumperDates());
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class JumperDates extends StatelessWidget {

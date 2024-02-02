@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:jumperdates/widgets/request_button.dart';
 
+import '../models/date.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -59,19 +61,22 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      DatePicker(
-                        height: 100,
-                        DateTime.now(),
-                        initialSelectedDate: DateTime.now(),
-                        selectionColor: const Color.fromARGB(255, 229, 229, 229),
-                        selectedTextColor: const Color.fromARGB(255, 52, 52, 52),
-                        onDateChange: (date) {
-                  
-                          setState(() {
-                            selectedDate = date;
-                          });
-                        },
+                    children: [
+                      Date(
+                        occupant: "Ashton Dunderdale",
+                        date: DatePicker(
+                          height: 100,
+                          DateTime.now(),
+                          initialSelectedDate: DateTime.now(),
+                          selectionColor: const Color.fromARGB(255, 229, 229, 229),
+                          selectedTextColor: const Color.fromARGB(255, 52, 52, 52),
+                          onDateChange: (date) {
+                                          
+                            setState(() {
+                              selectedDate = date;
+                            });
+                          },
+                        ),
                       ),
                     ],
                   ),
