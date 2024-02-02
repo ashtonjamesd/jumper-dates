@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:jumperdates/data.dart';
 import 'package:jumperdates/models/request.dart';
 import 'package:jumperdates/services/jumper.dart';
 
 class RequestButton extends StatelessWidget {
-  const RequestButton({super.key, required this.date, required this.request, required this.person});
+  const RequestButton({super.key, required this.date});
 
   final DateTime date;
-  final String request;
-  final String person;
 
   @override
   Widget build(BuildContext context) {
     JumperService jumper = JumperService();
+
     return GestureDetector(
       onTap: () {
+
         Request req = Request(
-          isRequest: true, 
+          isRequest: tempIsRequestVal == "CL" ? true : false, 
           description: "description", 
-          date: DateTime.now(), 
-          userID: "HARRISON"
+          date: date, 
+          userID: tempPersonVal,
         );
 
-        jumper.request(req, date);
+        jumper.request(req);
       },
       child: Container(
         height: 40,

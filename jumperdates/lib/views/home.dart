@@ -8,20 +8,11 @@ import '../models/date.dart';
 class Home extends StatefulWidget {
   Home({super.key});
 
-    late String selectedRequestType;
-    late String selectedPerson;
-
-    void handleDropdownChange(String selectedRequestType, String selectedPerson) {
-      this.selectedRequestType = selectedRequestType;
-      this.selectedPerson = selectedPerson;
-  }
-
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-
   late DateTime selectedDate = DateTime.now();
   Color ashtonColour = Colors.red;
   Color harryColour = Colors.blue;
@@ -82,7 +73,6 @@ class _HomeState extends State<Home> {
                           selectionColor: const Color.fromARGB(255, 229, 229, 229),
                           selectedTextColor: const Color.fromARGB(255, 52, 52, 52),
                           onDateChange: (date) {
-                                          
                             setState(() {
                               selectedDate = date;
                             });
@@ -102,9 +92,9 @@ class _HomeState extends State<Home> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 80),
-                  child: RequestDetails(date: selectedDate, onDropdownChange: widget.handleDropdownChange),
+                  child: RequestDetails(date: selectedDate),
                 ),
-                RequestButton(date: selectedDate, request: widget.selectedRequestType, person: widget.selectedPerson),
+                RequestButton(date: selectedDate),
               ],
             ),
           )
