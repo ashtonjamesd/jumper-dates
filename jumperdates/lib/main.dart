@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jumperdates/views/home.dart';
 import 'package:jumperdates/views/login.dart';
 
 
@@ -13,7 +14,7 @@ class JumperDates extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: Home(),
     );
   }
 }

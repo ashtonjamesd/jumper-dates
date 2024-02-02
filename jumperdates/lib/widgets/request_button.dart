@@ -12,18 +12,21 @@ class RequestButton extends StatelessWidget {
       onTap: () {
         print(date);
       },
-      child: Container(
-        height: 40,
-        width: 120,
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 62, 62, 62),
-          borderRadius: BorderRadius.circular(4)
-        ),
-        child: const Center(
-          child: Text(
-            "Request",
-            style: TextStyle(
-              color: Colors.white
+      child: Padding(
+        padding: const EdgeInsets.only(top: 40),
+        child: Container(
+          height: 40,
+          width: 120,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 62, 62, 62),
+            borderRadius: BorderRadius.circular(4)
+          ),
+          child: const Center(
+            child: Text(
+              "Request",
+              style: TextStyle(
+                color: Colors.white
+              ),
             ),
           ),
         ),

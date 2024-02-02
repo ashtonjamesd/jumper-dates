@@ -36,28 +36,46 @@ class _HomeState extends State<Home> {
       ),
       body: Column(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: SizedBox(
-              height: 400,
-              width: 1200,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  DatePicker(
-                    height: 100,
-                    DateTime.now(),
-                    initialSelectedDate: DateTime.now(),
-                    selectionColor: const Color.fromARGB(255, 229, 229, 229),
-                    selectedTextColor: const Color.fromARGB(255, 52, 52, 52),
-                    onDateChange: (date) {
-
-                      setState(() {
-                        selectedDate = date;
-                      });
-                    },
+          Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                height: 120,
+                width: 1200,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    left: BorderSide(
+                      color: Colors.grey,
+                      width: 2
+                    ),
+                    right: BorderSide(
+                      color: Colors.grey,
+                      width: 2
+                    ),
                   ),
-                ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      DatePicker(
+                        height: 100,
+                        DateTime.now(),
+                        initialSelectedDate: DateTime.now(),
+                        selectionColor: const Color.fromARGB(255, 229, 229, 229),
+                        selectedTextColor: const Color.fromARGB(255, 52, 52, 52),
+                        onDateChange: (date) {
+                  
+                          setState(() {
+                            selectedDate = date;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
