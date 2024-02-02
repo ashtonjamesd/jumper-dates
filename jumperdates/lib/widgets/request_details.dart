@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../data.dart';
 
 class RequestDetails extends StatefulWidget {
-  const RequestDetails({super.key, required this.date});
+  const RequestDetails({Key? key, required this.date});
 
   final DateTime date;
 
@@ -12,10 +11,9 @@ class RequestDetails extends StatefulWidget {
 }
 
 class _RequestDetailsState extends State<RequestDetails> {
-
   late DateTime selectedDate;
-  late String selectedRequestType = "CL";
-  late String selectedPerson = "HO"; 
+  String selectedRequestType = ""; // Set default value to an empty string
+  String selectedPerson = ""; // Set default value to an empty string
 
   @override
   void initState() {
@@ -53,14 +51,15 @@ class _RequestDetailsState extends State<RequestDetails> {
           DropdownMenu(
             textStyle: const TextStyle(fontSize: 12),
             dropdownMenuEntries: const [
+              DropdownMenuEntry(value: "", label: "Select"), // Added default empty value
               DropdownMenuEntry(value: "CL", label: "Claim"),
               DropdownMenuEntry(value: "CA", label: "Cancel"),
             ],
             selectedValue: selectedRequestType,
             onChanged: (String? value) {
               setState(() {
-                selectedRequestType = value ?? "CL";
-                tempIsRequestVal = value ?? "CL";
+                selectedRequestType = value ?? "";
+                tempIsRequestVal = value ?? "";
               });
             },
           ),
@@ -74,14 +73,15 @@ class _RequestDetailsState extends State<RequestDetails> {
           DropdownMenu(
             textStyle: const TextStyle(fontSize: 12),
             dropdownMenuEntries: const [
+              DropdownMenuEntry(value: "", label: "Select"), // Added default empty value
               DropdownMenuEntry(value: "AD", label: "Ashton Dunderdale"),
               DropdownMenuEntry(value: "HO", label: "Harrison O'Leary"),
             ],
             selectedValue: selectedPerson,
             onChanged: (String? value) {
               setState(() {
-                selectedPerson = value ?? "AD";
-                tempPersonVal = value ?? "CL";
+                selectedPerson = value ?? "";
+                tempPersonVal = value ?? "";
               });
             },
           ),
@@ -99,7 +99,8 @@ class _RequestDetailsState extends State<RequestDetails> {
 }
 
 class DropdownMenu extends StatelessWidget {
-  const DropdownMenu({super.key, 
+  const DropdownMenu({
+    Key? key,
     required this.dropdownMenuEntries,
     required this.textStyle,
     required this.selectedValue,
