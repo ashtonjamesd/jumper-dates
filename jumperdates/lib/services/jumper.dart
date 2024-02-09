@@ -8,6 +8,10 @@ class JumperService {
   final String ip = '172.25.7.86';
   final int port = 8001;
 
+  static bool success = false;
+
+  static bool getSuccess() => success;
+
   Future<bool> sendRequest(JumperRequest request) async {
 
     String date = request.date.toString().substring(0, 10);
@@ -30,6 +34,10 @@ class JumperService {
       final socket = await Socket.connect(ip, port);
 
       socket.write(jumperRequest);
+      
+      listenForServer(socket);
+      print("listening");
+
       return true;
 
     } catch (exception) {
@@ -38,7 +46,20 @@ class JumperService {
     }
   }
 
-  Guid generateRequestID() => Guid.newGuid;
+  void listenForServer(Socket socket) {
+    print('Connected: ${socket.remoteAddress.address}:${socket.remotePort}');
+
+    socket.listen((data) {
+      print("Server: ${String.fromCharCodes(data).trim()}");
+      if (String.fromCharCodes(data).trim() == "T") {
+        success = true;
+      } else {
+        success = false;
+      }
+    }, onDone: () {
+      socket.destroy();
+    });
+  }
 }
 
 

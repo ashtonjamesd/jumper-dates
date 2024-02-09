@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 
 class Date extends StatelessWidget {
-  Date({super.key, required this.occupant, required this.date});
+  const Date({super.key, required this.occupant, required this.date});
 
-  String occupant;
-  DatePicker date;
+  final String occupant;
+  final DatePicker date;
 
   @override
   Widget build(BuildContext context) {

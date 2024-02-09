@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:jumperdates/services/jumper.dart';
+import 'package:jumperdates/widgets/booking_box.dart';
+import 'package:jumperdates/widgets/description_box.dart';
 import 'package:jumperdates/widgets/request_button.dart';
 import 'package:jumperdates/widgets/request_details.dart';
 
@@ -14,9 +17,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late DateTime selectedDate = DateTime.now();
-  TextEditingController descriptionController = TextEditingController();
   Color ashtonColour = Colors.red;
   Color harryColour = Colors.blue;
+  final TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -97,41 +100,38 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.only(right: 80),
                       child: RequestDetails(date: selectedDate),
                     ),
-                    RequestButton(date: selectedDate, description: descriptionController.text),
+                    RequestButton(
+                      date: selectedDate, 
+                      description: descriptionController.text,
+                      onRequestSent: () {
+                        showSnackbar(context);
+                      },
+                    ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 200, top: 32),
-                  child: Container(
-                    width: 520,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 236, 236, 236),
-                      borderRadius: BorderRadiusDirectional.circular(8),
-                      border: Border.all(color: const Color.fromARGB(255, 225, 225, 225), width: 2)
-                    ),
-                    child: TextField(
-                      style: const TextStyle(
-                        fontSize: 12,
-                      ),
-                      onChanged: (value) => setState(() {}),
-                      maxLines: null,
-                      controller: descriptionController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 236, 236, 236),
-                      ),
-                    ),
-                  ),
+                DescriptionBox(
+                  descriptionController: descriptionController,
+                  onDescriptionChanged: () => setState(() {}),           
                 ),
+                const BookingBox(),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  void showSnackbar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          JumperService.getSuccess() ? "Sound request mateo" 
+          : "bollocks request that mate",
+        ),
+        duration: const Duration(seconds: 1),
+      ),
+    );
+    JumperService.success = false;
   }
 }
