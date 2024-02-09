@@ -1,13 +1,17 @@
-class Request {
+import 'package:flutter_guid/flutter_guid.dart';
+
+class JumperRequest {
   bool isRequest;
-  String description;
+  Guid id;
   DateTime date;
   String userID;
+  String description;
 
-  Request({
+  JumperRequest({
     required this.isRequest, 
-    required this.description, 
+    required this.id, 
     required this.date, 
-    required this.userID
+    required this.userID,
+    required this.description,
   });
 }

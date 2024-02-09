@@ -36,9 +36,11 @@ class _RequestDetailsState extends State<RequestDetails> {
     return Container(
       width: 520,
       height: 40,
-      decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 243, 243, 243),
-          borderRadius: BorderRadius.all(Radius.circular(8))),
+      decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 243, 243, 243),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          border: Border.all(color: const Color.fromARGB(255, 225, 225, 225), width: 2),  
+      ),      
       child: Row(
         children: [
           const Padding(
@@ -49,7 +51,7 @@ class _RequestDetailsState extends State<RequestDetails> {
             ),
           ),
           DropdownMenu(
-            textStyle: const TextStyle(fontSize: 12),
+            textStyle: const TextStyle(fontSize: 12, color: Colors.black),
             dropdownMenuEntries: const [
               DropdownMenuEntry(value: "", label: "Select"), // Added default empty value
               DropdownMenuEntry(value: "CL", label: "Claim"),
@@ -71,7 +73,7 @@ class _RequestDetailsState extends State<RequestDetails> {
             ),
           ),
           DropdownMenu(
-            textStyle: const TextStyle(fontSize: 12),
+            textStyle: const TextStyle(fontSize: 12, color: Colors.black),
             dropdownMenuEntries: const [
               DropdownMenuEntry(value: "", label: "Select"), // Added default empty value
               DropdownMenuEntry(value: "AD", label: "Ashton Dunderdale"),

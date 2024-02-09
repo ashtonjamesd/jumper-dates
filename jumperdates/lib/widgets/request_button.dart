@@ -4,9 +4,10 @@ import 'package:jumperdates/models/request.dart';
 import 'package:jumperdates/services/jumper.dart';
 
 class RequestButton extends StatelessWidget {
-  const RequestButton({super.key, required this.date});
+  const RequestButton({super.key, required this.date, required this.description});
 
   final DateTime date;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +16,15 @@ class RequestButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
 
-        Request req = Request(
+        JumperRequest req = JumperRequest(
           isRequest: tempIsRequestVal == "CL" ? true : false, 
-          description: "description", 
+          id: jumper.generateRequestID(),
           date: date, 
           userID: tempPersonVal,
+          description: description,
         );
 
-        jumper.request(req);
+        jumper.sendRequest(req);
       },
       child: Container(
         height: 40,

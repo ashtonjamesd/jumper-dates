@@ -1,12 +1,44 @@
 import 'package:jumperdates/models/request.dart';
+import 'package:flutter_guid/flutter_guid.dart';
+import 'dart:io';
+import 'dart:convert';
 
 class JumperService {
 
-  bool request(Request request) {
-    print("date: ${request.date}");
-    print("person: ${request.userID}");
-    print("isRequest: ${request.isRequest}");
+  final String ip = '172.25.7.86';
+  final int port = 8001;
 
-    return true;
+  Future<bool> sendRequest(JumperRequest request) async {
+
+    String date = request.date.toString().substring(0, 10);
+    String userID = request.userID;
+    bool isRequest = request.isRequest;
+    Guid id = request.id;
+    String description = request.description;
+
+    Map<String, dynamic> jsonData = {
+      'RequestDate': date,
+      'UUID': id.toString(),
+      'UserUUID': userID,
+      'IsRequest': isRequest,
+      'Description': description,
+    };
+
+    String jumperRequest = jsonEncode(jsonData);
+
+    try {
+      final socket = await Socket.connect(ip, port);
+
+      socket.write(jumperRequest);
+      return true;
+
+    } catch (exception) {
+      print("Jumper Request Error: $exception");
+      return false;
+    }
   }
+
+  Guid generateRequestID() => Guid.newGuid;
 }
+
+

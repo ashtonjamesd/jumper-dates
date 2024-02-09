@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   date_picker_timeline: ^1.2.5
   firebase_core: ^2.25.3
+  flutter_guid: ^0.3.1
 
 dev_dependencies:
   flutter_test:
