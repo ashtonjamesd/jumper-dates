@@ -5,12 +5,16 @@ import 'dart:convert';
 
 class JumperService {
 
-  final String ip = '172.25.7.86';
-  final int port = 8001;
+  static const String ip = '172.25.7.86';
+  static const int port = 8001;
 
   static bool success = false;
 
   static bool getSuccess() => success;
+
+  static Future<Socket> createConnection() async {
+    return await Socket.connect(ip, port);
+  }
 
   Future<bool> sendRequest(JumperRequest request) async {
 
@@ -31,12 +35,10 @@ class JumperService {
     String jumperRequest = jsonEncode(jsonData);
 
     try {
-      final socket = await Socket.connect(ip, port);
+      Socket socket = await createConnection();
 
       socket.write(jumperRequest);
-      
-      listenForServer(socket);
-      print("listening");
+      listenForJumperServer(socket);
 
       return true;
 
@@ -46,7 +48,7 @@ class JumperService {
     }
   }
 
-  void listenForServer(Socket socket) {
+  static void listenForJumperServer(Socket socket) {
     print('Connected: ${socket.remoteAddress.address}:${socket.remotePort}');
 
     socket.listen((data) {
@@ -56,8 +58,6 @@ class JumperService {
       } else {
         success = false;
       }
-    }, onDone: () {
-      socket.destroy();
     });
   }
 }

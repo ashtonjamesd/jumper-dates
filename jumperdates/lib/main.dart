@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:jumperdates/services/jumper.dart';
 import 'package:jumperdates/views/home.dart';
 
 Future main() async {
   runApp(const JumperDates());
 
+  Socket socket = await JumperService.createConnection();
+  JumperService.listenForJumperServer(socket);
 }
 
 class JumperDates extends StatelessWidget {
