@@ -29,6 +29,7 @@ class JumperService {
 
   static Future<void> sendRequest(JumperRequest request) async {
     try {
+      // get all necessary data, map it and encode to json byte data
       String date = request.date.toString().substring(0, 10);
       String userID = request.userID;
       bool isRequest = request.isRequest;
@@ -45,11 +46,12 @@ class JumperService {
 
       String jumperRequest = jsonEncode(jsonData);
 
+      // encode json string into a byte array and send over to backend
       Socket? socket = await createSocket();
 
       socket?.write(jumperRequest);
-      // listenForJumperServer();
 
+      // listen for the server validation to see if request was a succcess
       socket?.listen((data) {
       print("Server: ${String.fromCharCodes(data).trim()}");
       if (String.fromCharCodes(data).trim() == "T") {
@@ -59,8 +61,10 @@ class JumperService {
       }
       });
 
+      // end socket to prevent poly listening error
       socket?.close();
 
+    // whoops
     } catch (exception) {
       print("Error: $exception");
     }

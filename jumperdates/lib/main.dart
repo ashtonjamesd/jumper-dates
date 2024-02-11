@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+// commented this out because it auto-generated and crashed it so well done dart
 // import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:flutter/material.dart';
