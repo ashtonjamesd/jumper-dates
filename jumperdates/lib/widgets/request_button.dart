@@ -26,22 +26,22 @@ class _RequestButtonState extends State<RequestButton> {
 
         JumperRequest req = JumperRequest(
           isRequest: tempIsRequestVal == "CL" ? true : false, 
-          id: Guid.newGuid,
-          date: widget.date, 
+          id: Guid.newGuid.toString(),
+          date: widget.date.toString(), 
           userID: tempPersonVal,
           description: widget.description,
         );
 
         try {
         JumperService.sendRequest(req);
-        await Future.delayed(const Duration(milliseconds: 500));
+        await Future.delayed(const Duration(seconds: 1));
         widget.onRequestSent();
 
         setState(() {
           requestButtonText = "Request sent";
-          requestButtonColour = const Color.fromARGB(255, 153, 214, 155);
+          requestButtonColour = const Color.fromARGB(255, 131, 120, 238);
         });
-        await Future.delayed(const Duration(milliseconds: 500));
+        await Future.delayed(const Duration(seconds: 1));
          setState(() {
           requestButtonText = "Request";
           requestButtonColour = Colors.white;

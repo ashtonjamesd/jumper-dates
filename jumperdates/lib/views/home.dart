@@ -126,6 +126,9 @@ class _HomeState extends State<Home> {
         content: Text(
           JumperService.getSuccess() ? "Successfully sent jumper request!" 
           : "Failed to send jumper request.",
+          style: TextStyle(
+            color: JumperService.getSuccess() ? const Color.fromARGB(255, 131, 120, 238) : const Color.fromARGB(255, 238, 147, 141),
+          ),
         ),
       ),
     );

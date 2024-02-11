@@ -3,6 +3,8 @@ import 'package:flutter_guid/flutter_guid.dart';
 import 'dart:io';
 import 'dart:convert';
 
+import '../data.dart';
+
 class JumperService {
 
  // DO NOT SHARE THIS IP ADDRESS PLEASE
@@ -39,7 +41,7 @@ class JumperService {
       String date = request.date.toString().substring(0, 10);
       String userID = request.userID;
       bool isRequest = request.isRequest;
-      Guid id = request.id;
+      String id = request.id;
       String description = request.description;
 
       Map<String, dynamic> jsonData = {
@@ -74,7 +76,29 @@ class JumperService {
     } catch (exception) {
       print("Error sending request: $exception");
     }
-    
+  }
+
+  static void formatRequests(String requestData) async {
+    var splitData = requestData.split('#D8JSPLIT#');
+
+    try {
+      for (var data in splitData) {
+        var json = jsonDecode(data);
+        
+        JumperRequest request = JumperRequest(
+          isRequest: json['IsRequest'], 
+          id: json['UUID'], 
+          date: json['RequestDate'], 
+          userID: json['UserUUID'] ,
+          description: json['Description'],
+        );
+
+        activeRequests.add(request);       
+      }
+
+    } catch (exception) {
+      print(exception);
+    }
   }
 }
 

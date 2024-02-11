@@ -11,11 +11,10 @@ Future main() async {
   runApp(const JumperDates());
 
   Socket? s = await JumperService.createSocket();
-
   s?.write(ascii.encode("BOOT"));
-  
-  s?.listen((data) {
-    print(String.fromCharCodes(data).trim());
+
+  s?.listen((data) {  
+    JumperService.formatRequests(String.fromCharCodes(data).trim());
   });
   
   s?.close();
@@ -26,7 +25,7 @@ class JumperDates extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Home(),
     );
