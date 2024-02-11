@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
-import 'package:jumperdates/models/request.dart';
 import 'package:jumperdates/services/jumper.dart';
 import 'package:jumperdates/widgets/booking_box.dart';
 import 'package:jumperdates/widgets/description_box.dart';
@@ -10,7 +9,7 @@ import 'package:jumperdates/widgets/request_details.dart';
 import '../widgets/date.dart';
 
 class Home extends StatefulWidget {
-  Home({super.key});
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -18,8 +17,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late DateTime selectedDate = DateTime.now();
-  Color ashtonColour = Colors.red;
-  Color harryColour = Colors.blue;
   final TextEditingController descriptionController = TextEditingController();
 
   @override

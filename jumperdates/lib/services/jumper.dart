@@ -13,17 +13,22 @@ class JumperService {
 
   static bool getSuccess() => wasSuccess;
 
-  static Future<Socket> createConnection() async {
-    return await Socket.connect(IP_ENDPOINT_ADDRESS, PORT);
+  static Future<Socket?> createConnection() async {
+    try {
+      return await Socket.connect(IP_ENDPOINT_ADDRESS, PORT);
+    
+    } catch (exception) {
+      print("Error creating socket connection: $exception");
+      return null;
+    }
   }
 
   static Future<Socket?> createSocket() async {
     try {
-      Socket socket = await createConnection();
-      return socket;
+      return await createConnection();
 
     } catch (exception) {
-      print("Jumper Request Error: $exception");
+      print("Error creating socket: $exception");
       return null;
     }
   }
@@ -67,7 +72,7 @@ class JumperService {
 
     // whoops
     } catch (exception) {
-      print("Error: $exception");
+      print("Error sending request: $exception");
     }
     
   }
