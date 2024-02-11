@@ -13,9 +13,12 @@ Future main() async {
   Socket? s = await JumperService.createSocket();
 
   s?.write(ascii.encode("BOOT"));
+  
   s?.listen((data) {
     print(String.fromCharCodes(data).trim());
   });
+  
+  s?.close();
 }
 
 class JumperDates extends StatelessWidget {
