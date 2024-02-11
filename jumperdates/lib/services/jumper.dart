@@ -5,60 +5,66 @@ import 'dart:convert';
 
 class JumperService {
 
-  static const String ip = '172.25.7.86';
-  static const int port = 8001;
+  static const String IP_ENDPOINT_ADDRESS = '192.168.1.250';
+  static const int PORT = 8001;
 
-  static bool success = false;
+  static bool wasSuccess = false;
 
-  static bool getSuccess() => success;
+  static bool getSuccess() => wasSuccess;
 
   static Future<Socket> createConnection() async {
-    return await Socket.connect(ip, port);
+    return await Socket.connect(IP_ENDPOINT_ADDRESS, PORT);
   }
 
-  Future<bool> sendRequest(JumperRequest request) async {
-
-    String date = request.date.toString().substring(0, 10);
-    String userID = request.userID;
-    bool isRequest = request.isRequest;
-    Guid id = request.id;
-    String description = request.description;
-
-    Map<String, dynamic> jsonData = {
-      'RequestDate': date,
-      'UUID': id.toString(),
-      'UserUUID': userID,
-      'IsRequest': isRequest,
-      'Description': description,
-    };
-
-    String jumperRequest = jsonEncode(jsonData);
-
+  static Future<Socket?> createSocket() async {
     try {
       Socket socket = await createConnection();
-
-      socket.write(jumperRequest);
-      listenForJumperServer(socket);
-
-      return true;
+      return socket;
 
     } catch (exception) {
       print("Jumper Request Error: $exception");
-      return false;
+      return null;
     }
   }
 
-  static void listenForJumperServer(Socket socket) {
-    print('Connected: ${socket.remoteAddress.address}:${socket.remotePort}');
+  static Future<void> sendRequest(JumperRequest request) async {
+    try {
+      String date = request.date.toString().substring(0, 10);
+      String userID = request.userID;
+      bool isRequest = request.isRequest;
+      Guid id = request.id;
+      String description = request.description;
 
-    socket.listen((data) {
+      Map<String, dynamic> jsonData = {
+        'RequestDate': date,
+        'UUID': id.toString(),
+        'UserUUID': userID,
+        'IsRequest': isRequest,
+        'Description': description,
+      };
+
+      String jumperRequest = jsonEncode(jsonData);
+
+      Socket? socket = await createSocket();
+
+      socket?.write(jumperRequest);
+      // listenForJumperServer();
+
+      socket?.listen((data) {
       print("Server: ${String.fromCharCodes(data).trim()}");
       if (String.fromCharCodes(data).trim() == "T") {
-        success = true;
+        wasSuccess = true;
       } else {
-        success = false;
+        wasSuccess = false;
       }
-    });
+      });
+
+      socket?.close();
+
+    } catch (exception) {
+      print("Error: $exception");
+    }
+    
   }
 }
 

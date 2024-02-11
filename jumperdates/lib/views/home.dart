@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:jumperdates/models/request.dart';
 import 'package:jumperdates/services/jumper.dart';
 import 'package:jumperdates/widgets/booking_box.dart';
 import 'package:jumperdates/widgets/description_box.dart';
@@ -100,13 +101,13 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.only(right: 80),
                       child: RequestDetails(date: selectedDate),
                     ),
-                    RequestButton(
-                      date: selectedDate, 
-                      description: descriptionController.text,
-                      onRequestSent: () {
-                        showSnackbar(context);
-                      },
-                    ),
+                     RequestButton(
+                       date: selectedDate, 
+                       description: descriptionController.text,
+                       onRequestSent: () {
+                         showSnackbar(context);
+                       },
+                     ),
                   ],
                 ),
                 DescriptionBox(
@@ -126,12 +127,11 @@ class _HomeState extends State<Home> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          JumperService.getSuccess() ? "Sound request mateo" 
-          : "bollocks request that mate",
+          JumperService.getSuccess() ? "Successfully sent jumper request!" 
+          : "Failed to send jumper request.",
         ),
-        duration: const Duration(seconds: 1),
       ),
     );
-    JumperService.success = false;
+    JumperService.wasSuccess = false;
   }
 }

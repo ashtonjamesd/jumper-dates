@@ -21,8 +21,6 @@ class _RequestButtonState extends State<RequestButton> {
 
   @override
   Widget build(BuildContext context) {
-    JumperService jumper = JumperService();
-
     return GestureDetector(
       onTap: () async {
 
@@ -35,7 +33,8 @@ class _RequestButtonState extends State<RequestButton> {
         );
 
         try {
-        jumper.sendRequest(req);
+        JumperService.sendRequest(req);
+        await Future.delayed(const Duration(milliseconds: 100));
         widget.onRequestSent();
 
         setState(() {
