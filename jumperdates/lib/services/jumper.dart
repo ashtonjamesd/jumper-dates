@@ -5,7 +5,8 @@ import 'dart:convert';
 
 class JumperService {
 
-  static const String IP_ENDPOINT_ADDRESS = '192.168.1.250';
+ // DO NOT SHARE THIS IP ADDRESS PLEASE
+  static const String IP_ENDPOINT_ADDRESS = '146.198.141.115';
   static const int PORT = 8001;
 
   static bool wasSuccess = false;

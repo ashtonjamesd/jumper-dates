@@ -34,7 +34,7 @@ class _RequestButtonState extends State<RequestButton> {
 
         try {
         JumperService.sendRequest(req);
-        await Future.delayed(const Duration(milliseconds: 100));
+        await Future.delayed(const Duration(milliseconds: 500));
         widget.onRequestSent();
 
         setState(() {
