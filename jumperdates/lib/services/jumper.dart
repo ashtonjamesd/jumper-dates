@@ -2,13 +2,15 @@ import 'package:jumperdates/models/request.dart';
 import 'package:flutter_guid/flutter_guid.dart';
 import 'dart:io';
 import 'dart:convert';
+import 'dart:core';
 
 import '../data.dart';
 
 class JumperService {
 
  // DO NOT SHARE THIS IP ADDRESS PLEASE
-  static const String IP_ENDPOINT_ADDRESS = '146.198.141.115';
+ // PUBLIC: 146.198.141.115
+  static const String IP_ENDPOINT_ADDRESS = '192.168.1.250';
   static const int PORT = 8001;
 
   static bool wasSuccess = false;
@@ -38,7 +40,8 @@ class JumperService {
   static Future<void> sendRequest(JumperRequest request) async {
     try {
       // get all necessary data and map it
-      String date = request.date.toString().substring(0, 10);
+      String date = request.date;
+      String dateOfRequest = request.dateOfRequest;
       String userID = request.userID;
       bool isRequest = request.isRequest;
       String id = request.id;
@@ -46,6 +49,7 @@ class JumperService {
 
       Map<String, dynamic> jsonData = {
         'RequestDate': date,
+        'DateOfRequest': dateOfRequest,
         'UUID': id.toString(),
         'UserUUID': userID,
         'IsRequest': isRequest,
@@ -88,7 +92,8 @@ class JumperService {
         JumperRequest request = JumperRequest(
           isRequest: json['IsRequest'], 
           id: json['UUID'], 
-          date: json['RequestDate'], 
+          date: json['RequestDate'],
+          dateOfRequest: json['DateOfRequest'],
           userID: json['UserUUID'] ,
           description: json['Description'],
         );

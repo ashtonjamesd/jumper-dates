@@ -3,6 +3,8 @@ import 'package:flutter_guid/flutter_guid.dart';
 import 'package:jumperdates/data.dart';
 import 'package:jumperdates/models/request.dart';
 import 'package:jumperdates/services/jumper.dart';
+import 'package:jumperdates/widgets/date.dart';
+import 'dart:core';
 
 class RequestButton extends StatefulWidget {
   const RequestButton({super.key, required this.date, required this.description, required this.onRequestSent});
@@ -27,20 +29,23 @@ class _RequestButtonState extends State<RequestButton> {
         JumperRequest req = JumperRequest(
           isRequest: tempIsRequestVal == "CL" ? true : false, 
           id: Guid.newGuid.toString(),
-          date: widget.date.toString(), 
+          date: widget.date.toString().substring(0, 10),
+          dateOfRequest: DateTime.now().toString().substring(0, 10),
           userID: tempPersonVal,
           description: widget.description,
         );
 
         try {
         JumperService.sendRequest(req);
-        await Future.delayed(const Duration(seconds: 1));
-        widget.onRequestSent();
-
+        
         setState(() {
           requestButtonText = "Request sent";
           requestButtonColour = const Color.fromARGB(255, 131, 120, 238);
         });
+        
+        await Future.delayed(const Duration(seconds: 1));
+        widget.onRequestSent();
+
         await Future.delayed(const Duration(seconds: 1));
          setState(() {
           requestButtonText = "Request";

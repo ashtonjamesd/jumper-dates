@@ -11,7 +11,7 @@ Future main() async {
   runApp(const JumperDates());
 
   Socket? s = await JumperService.createSocket();
-  s?.write(ascii.encode("BOOT"));
+  s?.write("BOOT");
 
   s?.listen((data) {  
     JumperService.formatRequests(String.fromCharCodes(data).trim());

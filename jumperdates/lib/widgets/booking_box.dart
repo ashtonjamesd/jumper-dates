@@ -87,7 +87,7 @@ class _BookingBoxState extends State<BookingBox> {
                             SizedBox(
                               width: 60,
                               child: Text(
-                                request.date,
+                                request.date.toString(),
                                 style: const TextStyle(
                                   fontSize: 10,
                                 ),
