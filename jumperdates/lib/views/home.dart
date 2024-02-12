@@ -114,8 +114,8 @@ class _HomeState extends State<Home> {
                         icon: const Icon(
                           Icons.refresh,
                         ),
-                                           ),
-                     )
+                      ),
+                    )
                   ],
                 ),
                 DescriptionBox(
