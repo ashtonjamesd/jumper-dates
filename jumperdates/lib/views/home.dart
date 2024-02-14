@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         title: const Text(
-          "JumperDates",
+          "Jumper Dates",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 82, 82, 82),

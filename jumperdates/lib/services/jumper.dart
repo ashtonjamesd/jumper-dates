@@ -10,7 +10,8 @@ class JumperService {
 
  // DO NOT SHARE THIS IP ADDRESS PLEASE
  // PUBLIC: 146.198.141.115
-  static const String IP_ENDPOINT_ADDRESS = '192.168.1.250';
+ // PRIVATE: 192.168.1.250
+  static const String IP_ENDPOINT_ADDRESS = '146.198.141.115';
   static const int PORT = 8001;
 
   static bool wasSuccess = false;
@@ -85,8 +86,13 @@ class JumperService {
   static void formatRequests(String requestData) async {
     var splitData = requestData.split('#D8JSPLIT#');
 
+    print(requestData);
+
+    int counter = 0;
+
     try {
       for (var data in splitData) {
+        print(counter);
         var json = jsonDecode(data);
         
         JumperRequest request = JumperRequest(
@@ -98,7 +104,8 @@ class JumperService {
           description: json['Description'],
         );
 
-        activeRequests.add(request);       
+        activeRequests.add(request);
+        counter++;    
       }
 
     } catch (exception) {
@@ -106,5 +113,3 @@ class JumperService {
     }
   }
 }
-
-
