@@ -97,6 +97,7 @@ class _BookingBoxState extends State<BookingBox> {
                               request.userID,
                               style: const TextStyle(
                                 fontSize: 10,
+                                fontWeight: FontWeight.bold
                               ),
                             ),
                           ],

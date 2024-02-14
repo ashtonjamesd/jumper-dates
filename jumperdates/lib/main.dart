@@ -8,16 +8,14 @@ import 'package:jumperdates/services/jumper.dart';
 import 'package:jumperdates/views/home.dart';
 
 Future main() async {
-  runApp(const JumperDates());
+  Socket? socket = await JumperService.createSocket();
 
-  Socket? s = await JumperService.createSocket();
-  s?.write("BOOT");
-
-  s?.listen((data) {  
-    JumperService.formatRequests(String.fromCharCodes(data).trim());
-  });
+  socket?.write("BOOT");
   
-  s?.close();
+  socket?.listen((data) => JumperService.formatRequests(String.fromCharCodes(data).trim()));
+  socket?.close();
+  
+  runApp(const JumperDates());
 }
 
 class JumperDates extends StatelessWidget {

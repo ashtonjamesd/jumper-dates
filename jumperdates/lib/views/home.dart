@@ -95,7 +95,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 24),
+                      padding: const EdgeInsets.only(right: 80),
                       child: RequestDetails(date: selectedDate),
                     ),
                      RequestButton(
@@ -105,17 +105,6 @@ class _HomeState extends State<Home> {
                          showSnackbar(context);
                        },
                      ),
-                     Padding(
-                       padding: const EdgeInsets.only(left: 16),
-                       child: IconButton(
-                        onPressed: () {
-                          // implement refresh functionality for request list view here
-                        }, 
-                        icon: const Icon(
-                          Icons.refresh,
-                        ),
-                      ),
-                    )
                   ],
                 ),
                 DescriptionBox(
